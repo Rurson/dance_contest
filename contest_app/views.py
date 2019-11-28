@@ -31,7 +31,15 @@ class DetailsView(DetailView):
         return context
 
 
-class VoteView(ListView):
-    model = Vote
+class VoteView(DetailView):
+    model = Contest
     context_object_name = 'votes'
     template_name = 'contest_app/vote.html'
+
+    def get_all_votes(self):
+        return Vote.objects.filter(contest=self.object.pk)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({"votes": self.get_all_votes()})
+        return context

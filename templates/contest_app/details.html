@@ -1,4 +1,7 @@
 <p>Contest name: {{ contest }}</p>
+<p>Vote: <a href="{% url 'contest:vote' contest.id %}">{{ contest }}</a></p>
+
+
 <p> Jurys </p>
 <ul>
 {% for jury in jurys  %}
