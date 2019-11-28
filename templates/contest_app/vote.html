@@ -1,10 +1,17 @@
 <p>Contenders</p>
-
-<form action="" method="post">
-    {% csrf_token %}
-    {% for vote in votes%}
-        <label for="vote{{vote.id}}"> {{vote.contender}} </label>
-        <input type="number" name="points" id="vote{{vote.id}}" value="{{vote.points}}">
-        <input type="submit" value="Vote"><br>
+{% if messages%}
+    {% for message in messages  %}
+        {% if message.tags == 'error' %}
+            <p> {{message}}</p>
+        {% endif %}
     {% endfor %}
+{% endif %}
+
+{% for vote in votes%}
+<form action="{% url 'contest:voting' vote.pk %}" method="post">
+    {% csrf_token %}
+    <label for="vote{{vote.id}}"> {{vote.contender}} </label>
+    <input type="number" name="points" id="vote{{vote.id}}" value="{{vote.points}}">
+    <input type="submit" value="Vote"><br>
 </form>
+{% endfor %}
