@@ -1,0 +1,11 @@
+<p>Contenders</p>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {% for vote in votes%}
+        <label for="vote{{vote.id}}"> {{vote.contender}} </label>
+        <input type="number" name="points" id="vote{{vote.id}}" value="{{vote.points}}">
+        <input type="submit" value="Vote"><br>
+    {% endfor %}
+
+</form>

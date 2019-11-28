@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.views.generic import ListView, DetailView
 
-from contest_app.models import Contest
+from contest_app.models import Contest, Vote
 
 
 class IndexView(ListView):
@@ -29,3 +29,9 @@ class DetailsView(DetailView):
         context.update({"jurys": self.get_all_jurys_for_contest()})
         context.update({"contenders": self.get_all_contenders_for_contest()})
         return context
+
+
+class VoteView(ListView):
+    model = Vote
+    context_object_name = 'votes'
+    template_name = 'contest_app/vote.html'

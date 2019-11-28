@@ -32,4 +32,7 @@ class Vote(models.Model):
     jury = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
     contender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
     stage = models.IntegerField(null=False)
-    points = models.IntegerField(null=False)
+    points = models.IntegerField()
+
+    def __str__(self):
+        return f"jury{self.jury}/contender_{self.contender}/stage_{self.stage}/points_{self.points}"
