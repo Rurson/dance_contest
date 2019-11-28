@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 
-from contest_app.models import Contest, Vote
+from contest_app.models import Contest, Vote, Stage
 
 
 class IndexView(ListView):
@@ -24,20 +24,24 @@ class DetailsView(DetailView):
     def get_all_contenders_for_contest(self):
         return self.object.membership_set.filter(member_type="C")
 
+    def get_all_stages_for_contest(self):
+        return Stage.objects.filter(contest=self.object.pk)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({"jurys": self.get_all_jurys_for_contest()})
         context.update({"contenders": self.get_all_contenders_for_contest()})
+        context.update({"stages": self.get_all_stages_for_contest()})
         return context
 
 
 class VoteView(DetailView):
-    model = Contest
-    context_object_name = 'votes'
+    model = Stage
+    context_object_name = 'stage'
     template_name = 'contest_app/vote.html'
 
     def get_all_votes(self):
-        return Vote.objects.filter(stage__contest=self.object.pk)
+        return Vote.objects.filter(stage=self.object.pk)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
