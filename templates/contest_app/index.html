@@ -1,6 +1,6 @@
 
 <ul>
 {% for contest in latest_contest_list %}
-    <li><a href="{url content}">{{contest}}</a></li>
+    <li><a href="{% url 'contest:details' contest.id   %}">{{contest}}</a></li>
 {% endfor %}
 </ul>
