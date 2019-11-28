@@ -6,7 +6,7 @@ from contest_app.models import Contest, Membership, Vote
 class MembershipInline(admin.TabularInline):
     model = Membership
     extra = 3
-    ordering = ['-type']
+    ordering = ['-member_type']
 
 
 class ContestAdmin(admin.ModelAdmin):

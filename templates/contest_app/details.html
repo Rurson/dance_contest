@@ -1,0 +1,14 @@
+<p>Contest name: {{ contest }}</p>
+<p> Jurys </p>
+<ul>
+{% for jury in jurys  %}
+    <li><p>{{ jury }}</p></li>
+{% endfor %}
+</ul>
+<p> Contenders </p>
+
+<ul>
+{% for contender in contenders  %}
+    <li><p>{{ contender }}</p></li>
+{% endfor %}
+</ul>

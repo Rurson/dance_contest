@@ -21,7 +21,7 @@ class Contest(models.Model):
 class Membership(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
     contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
-    type = models.CharField(max_length=25, choices=[("C", "Contender"), ("J", "Jury")])
+    member_type = models.CharField(max_length=25, choices=[("C", "Contender"), ("J", "Jury")])
 
     def __str__(self):
         return str(self.user)
