@@ -1,9 +1,7 @@
 <p>Contenders</p>
 {% if messages%}
     {% for message in messages  %}
-        {% if message.tags == 'error' %}
-            <p> {{message}}</p>
-        {% endif %}
+            <p> {{message.tags}} : {{message}}</p>
     {% endfor %}
 {% endif %}
 

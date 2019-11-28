@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from contest_app.models import Contest, Membership, Vote
+from contest_app.models import Contest, Membership, Vote, Stage
 
 
 class MembershipInline(admin.TabularInline):
@@ -19,6 +19,16 @@ class MembershipAdmin(admin.ModelAdmin):
     list_display = ['user', 'contest']
 
 
+class VoteInline(admin.TabularInline):
+    model = Vote
+    extra = 0
+
+
+class StageAdmin(admin.ModelAdmin):
+    inlines = [VoteInline]
+
+
 admin.site.register(Contest, ContestAdmin)
 admin.site.register(Membership, MembershipAdmin)
 admin.site.register(Vote)
+admin.site.register(Stage, StageAdmin)
