@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from django.urls import reverse
 from django.views.generic import ListView, DetailView
 
@@ -25,7 +25,7 @@ class DetailsView(DetailView):
         return self.object.membership_set.filter(member_type="C")
 
     def get_all_stages_for_contest(self):
-        return Stage.objects.filter(contest=self.object.pk)
+        return get_list_or_404(Stage, contest=self.object.pk)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -35,7 +35,7 @@ class DetailsView(DetailView):
         return context
 
 
-class VoteView(DetailView):
+class StageView(DetailView):
     model = Stage
     context_object_name = 'stage'
     template_name = 'contest_app/vote.html'
