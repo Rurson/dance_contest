@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
 from contest_app.models import Contest, Membership
 
 
