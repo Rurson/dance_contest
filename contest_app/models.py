@@ -1,5 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
+import enum
+
+
+class MemberTypeEnum(enum.Enum):
+    CONTENDER = "Contender"
+    JURY = "Jury"
+    ORGANIZER = "Organizer"
 
 
 class Contest(models.Model):
@@ -21,7 +28,9 @@ class Contest(models.Model):
 class Membership(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
     contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
-    member_type = models.CharField(max_length=25, choices=[("C", "Contender"), ("J", "Jury")])
+    member_type = models.CharField(
+        max_length=25, choices=[(tag, tag.value) for tag in MemberTypeEnum]
+    )
 
     def __str__(self):
         return str(self.user)
@@ -32,7 +41,7 @@ class Stage(models.Model):
     stage_no = models.IntegerField()
 
     def __str__(self):
-        return f'{self.contest}/stage_{self.stage_no}'
+        return f"{self.contest}/stage_{self.stage_no}"
 
 
 class Vote(models.Model):

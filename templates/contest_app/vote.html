@@ -9,7 +9,7 @@
 <form action="{% url 'contest:voting' vote.pk %}" method="post">
     {% csrf_token %}
     <label for="vote{{vote.id}}"> {{vote.contender}} </label>
-    <input type="number" name="points" id="vote{{vote.id}}" value="{{vote.points}}">
+    <input type="range" min="0" max="10" value="{{vote.points}}" name="points" id="vote{{vote.id}}" >
     <input type="submit" value="Vote"><br>
 </form>
 {% endfor %}

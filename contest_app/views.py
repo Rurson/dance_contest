@@ -57,20 +57,20 @@ def vote(request, vote_id):
         points = int(request.POST['points'])
     except KeyError as e:
         messages.add_message(request, messages.ERROR, 'Problem with finding points')
-        return HttpResponseRedirect(reverse(f'contest:vote', args=(vote.stage.contest.pk,)))
+        return HttpResponseRedirect(reverse(f'contest:stage', args=(vote.stage.contest.pk,)))
     except TypeError as e:
         messages.add_message(request, messages.ERROR, 'Point cant be casted to int')
-        return HttpResponseRedirect(reverse(f'contest:vote', args=(vote.stage.contest.pk,)))
+        return HttpResponseRedirect(reverse(f'contest:stage', args=(vote.stage.contest.pk,)))
 
     if vote.points != 0:
         messages.add_message(request, messages.ERROR, 'Vote already submitted')
-        return HttpResponseRedirect(reverse(f'contest:vote', args=(vote.stage.contest.pk,)))
+        return HttpResponseRedirect(reverse(f'contest:stage', args=(vote.stage.contest.pk,)))
     if points < 0:
         messages.add_message(request, messages.ERROR, 'Vote cant be negative')
-        return HttpResponseRedirect(reverse(f'contest:vote', args=(vote.stage.contest.pk,)))
+        return HttpResponseRedirect(reverse(f'contest:stage', args=(vote.stage.contest.pk,)))
 
     vote.points = points
     vote.save()
     messages.add_message(request, messages.INFO, 'Vote processed')
 
-    return HttpResponseRedirect(reverse(f'contest:vote', args=(vote.stage.contest.pk,)))
+    return HttpResponseRedirect(reverse(f'contest:stage', args=(vote.stage.contest.pk,)))
