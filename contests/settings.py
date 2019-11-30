@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'contest_app.apps.FirstAppConfig',
+    'user.apps.UserConfig',
 ]
 
 MIDDLEWARE = [
